@@ -4,7 +4,7 @@ from typing import Optional
 from fastapi import APIRouter, Depends, HTTPException, Query
 from synapso_core import CortexManager
 
-from src.models import (
+from ..models import (
     Cortex,
     CreateCortexRequest,
     CreateCortexResponse,
@@ -12,7 +12,7 @@ from src.models import (
     ListCortexResponse,
 )
 
-router = APIRouter(prefix="/cortex", tags=["cortex"])
+router = APIRouter(tags=["cortex"])
 
 
 @router.post(

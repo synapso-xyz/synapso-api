@@ -4,9 +4,9 @@ from http import HTTPStatus
 from fastapi import APIRouter, Depends
 from synapso_core.query_manager import QueryManager
 
-from src.models import QueryRequest, QueryResponse
+from ..models import QueryRequest, QueryResponse
 
-router = APIRouter(prefix="/query", tags=["query"])
+router = APIRouter(tags=["query"])
 
 
 @router.post("/query", status_code=HTTPStatus.OK, response_model=QueryResponse)
