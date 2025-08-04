@@ -22,7 +22,7 @@ async def init():
     }
 
 
-def _initialize_sqlite_db(location: str) -> bool:
+def _initialize_sqlite_db(location: str) -> None:
     """
     Initialize the SQLite database.
     """
@@ -31,14 +31,14 @@ def _initialize_sqlite_db(location: str) -> bool:
         logger.info("db_path after resolution: %s", db_path)
         if db_path.exists():
             logger.info("SQLite database already exists at %s", db_path)
-            return True
+            return
 
         db_path.parent.mkdir(parents=True, exist_ok=True)
         db_path.touch()
         logger.info("SQLite database created at %s", db_path)
-        return True
+        return
     except Exception as e:
-        logger.error("Error initializing SQLite database: %s", e, err=True)
+        logger.error("Error initializing SQLite database: %s", e)
         raise e
 
 
@@ -53,7 +53,7 @@ def _initialize_meta_store() -> bool:
         meta_store.setup()
         return True
     except Exception as e:
-        logger.error("Error initializing meta store: %s", e, err=True)
+        logger.error("Error initializing meta store: %s", e)
         return False
 
 
@@ -66,8 +66,9 @@ def _initialize_vector_store() -> bool:
         _initialize_sqlite_db(vector_store_path)
         vector_store = DataStoreFactory.get_vector_store(vector_store_type)
         vector_store.setup()
+        return True
     except Exception as e:
-        logger.error("Error initializing vector store: %s", e, err=True)
+        logger.error("Error initializing vector store: %s", e)
         return False
 
 
@@ -80,6 +81,7 @@ def _initialize_chunk_store() -> bool:
         _initialize_sqlite_db(private_store_path)
         private_store = DataStoreFactory.get_private_store(private_store_type)
         private_store.setup()
+        return True
     except Exception as e:
-        logger.error("Error initializing private store: %s", e, err=True)
+        logger.error("Error initializing private store: %s", e)
         return False
