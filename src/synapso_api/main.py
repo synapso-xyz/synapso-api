@@ -12,4 +12,5 @@ app.include_router(query.router, prefix="/query")
 # Health check route
 @app.get("/")
 async def read_root():
-    return {"message": "Server is running ✅"}
+    """Health check endpoint that returns API status."""
+    return {"message": "Synapso API is running"}
