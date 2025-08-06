@@ -4,11 +4,11 @@ version = "0.1.0"
 description = "Synapso API"
 authors = [{ name = "Ganesh Palanikumar" }]
 readme = "README.md"
-requires-python = ">=3.13"
-dependencies = ["synapso-core>=0.2.0", "fastapi>=0.116.1", "uvicorn>=0.35.0"]
+requires-python = ">=3.11"
+dependencies = ["synapso-core>=0.2.1", "fastapi>=0.116.1", "uvicorn>=0.35.0"]
 
 [project.scripts]
-synapso = "synapso_api.main:app"
+synapso = "synapso_api.main:synapso_api"
 
 [tool.setuptools]
 package-dir = { "" = "src" }

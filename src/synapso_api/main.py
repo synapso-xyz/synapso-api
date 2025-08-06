@@ -2,16 +2,16 @@ from fastapi import FastAPI
 
 from .routes import cortex, query, system
 
-app = FastAPI()
+synapso_api = FastAPI()
 
 
-app.include_router(cortex.router, prefix="/cortex")
-app.include_router(query.router, prefix="/query")
-app.include_router(system.router, prefix="/system")
+synapso_api.include_router(cortex.router, prefix="/cortex")
+synapso_api.include_router(query.router, prefix="/query")
+synapso_api.include_router(system.router, prefix="/system")
 
 
 # Health check route
-@app.get("/")
+@synapso_api.get("/")
 async def read_root():
     """Health check endpoint that returns API status."""
     return {"message": "Synapso API is running"}
