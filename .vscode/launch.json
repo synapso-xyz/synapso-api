@@ -10,11 +10,12 @@
             "request": "launch",
             "module": "uvicorn",
             "args": [
-                "src.main:app",
+                "synapso_api.main:synapso_api",
                 "--reload",
                 "--port",
                 "50000"
-            ]
+            ],
+            "cwd": "${workspaceFolder}/src"
         }
     ]
 }

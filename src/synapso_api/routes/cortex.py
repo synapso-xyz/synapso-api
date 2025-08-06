@@ -71,10 +71,10 @@ async def index_cortex(
         )
 
     result = cortex_manager.index_cortex(cortex_id, cortex_name)
-    if result.success:
-        return {"message": "Cortex indexed"}
+    if result:
+        return {"message": "Cortex indexed successfully"}
     else:
         raise HTTPException(
             status_code=HTTPStatus.INTERNAL_SERVER_ERROR,
-            detail=result.error,
+            detail=f"Failed to index cortex: {str(result) if hasattr(result, '__str__') else 'Unknown error'}",
         )
