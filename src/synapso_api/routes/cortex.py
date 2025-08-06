@@ -76,5 +76,5 @@ async def index_cortex(
     else:
         raise HTTPException(
             status_code=HTTPStatus.INTERNAL_SERVER_ERROR,
-            detail="Failed to index cortex",
+            detail=f"Failed to index cortex: {str(result) if hasattr(result, '__str__') else 'Unknown error'}",
         )
