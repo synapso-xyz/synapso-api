@@ -12,6 +12,9 @@ logger = get_logger(__name__)
 
 @router.post("/init")
 async def init():
+    """
+    Initialize the meta store, vector store, and chunk store.
+    """
     meta_store_initialized = _initialize_meta_store()
     vector_store_initialized = _initialize_vector_store()
     chunk_store_initialized = _initialize_chunk_store()
@@ -43,6 +46,9 @@ def _initialize_sqlite_db(location: str) -> None:
 
 
 def _initialize_meta_store() -> bool:
+    """
+    Initialize the meta store.
+    """
     try:
         config: GlobalConfig = get_config()
         meta_store_path = config.meta_store.meta_db_path
@@ -58,6 +64,9 @@ def _initialize_meta_store() -> bool:
 
 
 def _initialize_vector_store() -> bool:
+    """
+    Initialize the vector store.
+    """
     try:
         config: GlobalConfig = get_config()
         vector_store_path = config.vector_store.vector_db_path
@@ -73,6 +82,9 @@ def _initialize_vector_store() -> bool:
 
 
 def _initialize_chunk_store() -> bool:
+    """
+    Initialize the chunk store.
+    """
     try:
         config: GlobalConfig = get_config()
         private_store_path = config.private_store.private_db_path

@@ -23,6 +23,9 @@ router = APIRouter(tags=["cortex"])
 async def create_cortex(
     request: CreateCortexRequest, cortex_manager: CortexManager = Depends(CortexManager)
 ):
+    """
+    Create a new cortex.
+    """
     created_cortex = cortex_manager.create_cortex(request.name, request.path)
     return CreateCortexResponse(cortex=Cortex.from_db_cortex(created_cortex))
 
@@ -37,6 +40,9 @@ async def get_cortex(
     cortex_name: Optional[str] = Query(None, description="The name of the cortex"),
     cortex_manager: CortexManager = Depends(CortexManager),
 ):
+    """
+    Get a cortex by ID or name.
+    """
     if cortex_id:
         cortex = cortex_manager.get_cortex_by_id(cortex_id)
     elif cortex_name:
@@ -52,6 +58,9 @@ async def get_cortex(
 
 @router.get("/list", response_model=ListCortexResponse, status_code=HTTPStatus.OK)
 async def list_cortex(cortex_manager: CortexManager = Depends(CortexManager)):
+    """
+    List all cortices.
+    """
     cortices = cortex_manager.list_cortices()
     return ListCortexResponse(
         cortices=[Cortex.from_db_cortex(cortex) for cortex in cortices]
@@ -64,6 +73,9 @@ async def index_cortex(
     cortex_name: Optional[str] = Query(None, description="The name of the cortex"),
     cortex_manager: CortexManager = Depends(CortexManager),
 ):
+    """
+    Index a cortex by ID or name.
+    """
     if not cortex_id and not cortex_name:
         raise HTTPException(
             status_code=HTTPStatus.BAD_REQUEST,
